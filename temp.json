@@ -1,0 +1,35 @@
+{
+  "teams": [
+    {
+      "id": 0,
+      "name": "",
+      "scores": []
+    },
+    {
+      "name": "example",
+      "hex": "#12dd34",
+      "id": 100,
+      "scores": []
+    },
+    {
+      "id": 1,
+      "name": "",
+      "scores": []
+    },
+    {
+      "id": 2,
+      "name": "",
+      "scores": []
+    },
+    {
+      "id": 3,
+      "name": "",
+      "scores": []
+    },
+    {
+      "id": 4,
+      "name": "",
+      "scores": []
+    }
+  ]
+}

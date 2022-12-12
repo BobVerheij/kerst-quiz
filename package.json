@@ -1,0 +1,30 @@
+{
+  "name": "hum-kerst",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "json-server": "json-server --host 192.168.1.57 --port 3004 --watch --id  'uuid' db.json ",
+    "dev": "next & npm run json-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^17.0.23",
+    "@types/react": "^17.0.43",
+    "next": "^12.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.5",
+    "typescript": "^4.6.3"
+  },
+  "devDependencies": {
+    "@humanoids/eslint-config": "^0.0.14",
+    "@humanoids/prettier-config": "^0.0.4",
+    "@types/styled-components": "^5.1.26",
+    "babel-plugin-inline-react-svg": "^2.0.1",
+    "eslint": "^8.11.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.6.1"
+  }
+}
