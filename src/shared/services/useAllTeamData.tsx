@@ -20,7 +20,7 @@ export const useAllTeamData = () => {
   useEffect(() => {
     const intervalletje = setInterval(() => {
       fetchData();
-    }, 60000);
+    }, 1000);
 
     fetchData();
 

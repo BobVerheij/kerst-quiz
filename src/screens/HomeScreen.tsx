@@ -20,16 +20,17 @@ export const HomeScreen = () => {
         }}
       >
         {teams
+          ?.sort((a, b) => (a.name || a.id)?.localeCompare(b.name || b.id))
           ?.sort(
             (a, b) =>
-              b.scores?.reduce(
+              (b.scores?.reduce(
                 (acc, dat) => dat.correct + (dat.bonus || 0) + acc,
                 0
-              ) -
-              a.scores?.reduce(
+              ) || 0) -
+              (a.scores?.reduce(
                 (acc, dat) => dat.correct + (dat.bonus || 0) + acc,
                 0
-              )
+              ) || 0)
           )
           .map((t, index) => (
             <TeamCard

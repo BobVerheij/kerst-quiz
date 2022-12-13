@@ -7,25 +7,23 @@ import { Button } from "../../shared/components/Button";
 import { Paper } from "../../shared/components/Paper";
 import { ShredFilter } from "../../shared/components/ShredFilter";
 import { useTeamData } from "../../shared/services/useTeamData";
+import { useRouter } from "next/router";
 
-interface ITeam {
-  team: TeamType;
-}
+const Team = () => {
+  const router = useRouter();
+  const { id } = router.query;
 
-const Team = ({ ...props }: ITeam) => {
   const [showScore, setShowScore] = useState(false);
 
-  const { name, id, hex } = props.team;
+  const { team, fetchData: refetchData } = useTeamData(id as string);
 
-  const { team, fetchData: refetchData } = useTeamData(id);
-
-  console.log({ name, id, hex });
+  console.log(team?.name);
 
   const lastRound = team?.scores?.length || 1;
   const nextRound = lastRound < 7 ? lastRound + 1 : 7;
 
   const handleShred = async () => {
-    const url = "https://kerst-quiz-db.vercel.app/api/teams/" + id;
+    const url = "https://kerst-quiz-db.vercel.app/api/teams/" + team?.id;
 
     console.log(url);
 
@@ -116,45 +114,6 @@ const Team = ({ ...props }: ITeam) => {
       )}
     </>
   );
-};
-
-export const getStaticPaths = async () => {
-  const url = "https://kerst-quiz-db.vercel.app/api/teams";
-
-  const res = await fetch(url);
-
-  const teams: TeamType[] = await res.json();
-
-  const paths = teams.map((team) => {
-    return {
-      params: {
-        name: team.name || team.id,
-      },
-    };
-  });
-
-  return { paths, fallback: false };
-};
-
-export const getStaticProps = async ({ params }) => {
-  const name = params.name;
-
-  const url = "https://kerst-quiz-db.vercel.app/api/teams/";
-
-  const res = await fetch(url);
-
-  const teams: TeamType[] = await res.json();
-
-  const team =
-    teams.find((t) => t.id === name) || teams.find((t) => t.name === name);
-
-  console.log(team);
-
-  return {
-    props: {
-      team,
-    }, // will be passed to the page component as props
-  };
 };
 
 export default Team;

@@ -16,7 +16,7 @@ const Wrapper = styled.div<{ bgColor?: string; pos?: number }>`
 
   top: ${({ pos }) => pos || 0}px;
 
-  transition: top 0.4s ease;
+  transition: top 2s ease;
 
   filter: saturate(0.66);
   cursor: pointer;
