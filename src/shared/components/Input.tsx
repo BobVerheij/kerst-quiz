@@ -8,7 +8,9 @@ const InputStyled = styled.input<{ square?: boolean }>`
   border: 0.25rem solid black;
   padding: 0.5rem;
   text-align: center;
-  background-color: ${({ color }) => color || "#fff"};
+
+  background-color: transparent;
+
   user-select: none;
   cursor: pointer;
   width: 100%;

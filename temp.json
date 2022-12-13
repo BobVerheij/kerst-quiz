@@ -1,35 +1,19 @@
 {
   "teams": [
     {
-      "id": 0,
-      "name": "",
-      "scores": []
+      "id": "XUZ4VQfukU"
     },
     {
-      "name": "example",
-      "hex": "#12dd34",
-      "id": 100,
-      "scores": []
+      "id": "vDLPzRO89k"
     },
     {
-      "id": 1,
-      "name": "",
-      "scores": []
+      "id": "1mlmxUigLR"
     },
     {
-      "id": 2,
-      "name": "",
-      "scores": []
+      "id": "Ldr9OyuOL3"
     },
     {
-      "id": 3,
-      "name": "",
-      "scores": []
-    },
-    {
-      "id": 4,
-      "name": "",
-      "scores": []
+      "id": "KOyD1AAAFj"
     }
   ]
 }

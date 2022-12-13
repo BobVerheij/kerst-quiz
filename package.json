@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "json-server": "json-server --host 192.168.1.57 --port 3004 --watch --id  'uuid' db.json ",
-    "dev": "next & npm run json-server"
+    "dev": "next"
   },
   "author": "",
   "license": "ISC",

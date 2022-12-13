@@ -6,7 +6,7 @@ export type Round = {
 };
 
 export type Team = {
-  id: number;
+  id: string;
   hex?: string;
   name?: string;
   scores: Round[];

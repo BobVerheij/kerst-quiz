@@ -15,19 +15,23 @@ interface ITeam {
 const Team = ({ ...props }: ITeam) => {
   const [showScore, setShowScore] = useState(false);
 
-  const { team, fetchData: refetchData } = useTeamData(props?.team?.id);
+  const { name, id, hex } = props.team;
+
+  const { team, fetchData: refetchData } = useTeamData(id);
+
+  console.log({ name, id, hex });
 
   const lastRound = team?.scores?.length || 1;
   const nextRound = lastRound < 7 ? lastRound + 1 : 7;
 
   const handleShred = async () => {
-    const url = "http://192.168.1.57:3004/teams/" + team.id;
+    const url = "https://kerst-quiz-db.vercel.app/api/teams/" + id;
+
+    console.log(url);
 
     const currentTeam: TeamType = await (await fetch(url)).json();
 
-    if (!currentTeam) {
-      return;
-    }
+    console.log(currentTeam);
 
     const scoresFilled = currentTeam?.scores?.some(
       (s) => s.round === lastRound
@@ -76,7 +80,7 @@ const Team = ({ ...props }: ITeam) => {
         <ScreenStyles.HomeScreen bgColor={team.hex} fullWidth>
           <meta name="theme-color" content={team.hex} />
 
-          <h1>Team: {team.name.toUpperCase() || team.id}</h1>
+          <h1>Team: {team.name?.toUpperCase() || team.id}</h1>
           <br />
           <p>Current Round: {nextRound}</p>
           <br />
@@ -115,7 +119,7 @@ const Team = ({ ...props }: ITeam) => {
 };
 
 export const getStaticPaths = async () => {
-  const url = "http://192.168.1.57:3004/teams";
+  const url = "https://kerst-quiz-db.vercel.app/api/teams";
 
   const res = await fetch(url);
 
@@ -124,7 +128,7 @@ export const getStaticPaths = async () => {
   const paths = teams.map((team) => {
     return {
       params: {
-        name: team.name?.toLocaleLowerCase() || team.id,
+        name: team.name || team.id,
       },
     };
   });
@@ -135,15 +139,16 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const name = params.name;
 
-  const url = "http://192.168.1.57:3004/teams/";
+  const url = "https://kerst-quiz-db.vercel.app/api/teams/";
 
   const res = await fetch(url);
 
   const teams: TeamType[] = await res.json();
 
   const team =
-    teams.find((t) => t.id === Number(name)) ||
-    teams.find((t) => t.name === name);
+    teams.find((t) => t.id === name) || teams.find((t) => t.name === name);
+
+  console.log(team);
 
   return {
     props: {

@@ -28,13 +28,4 @@ export const HomeScreen = styled.div<{ bgColor?: string; fullWidth?: boolean }>`
     margin: 0;
     padding: 0;
   }
-
-  span {
-    font-family: "Courier New";
-    font-size: 0.9em;
-    padding: 0.25em 0.66em;
-    border-radius: 0.25em;
-    background-color: black;
-    color: blanchedalmond;
-  }
 `;

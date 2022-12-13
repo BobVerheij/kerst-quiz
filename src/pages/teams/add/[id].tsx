@@ -12,7 +12,7 @@ const Addition = ({ ...props }) => {
   const router = useRouter();
 
   const handleSave = async () => {
-    const url = "http://192.168.1.57:3004/teams/" + props?.id;
+    const url = "https://kerst-quiz-db.vercel.app/api/teams/" + props?.id;
 
     if (!(name && color)) {
       return;
@@ -66,7 +66,7 @@ const Addition = ({ ...props }) => {
 };
 
 export const getStaticPaths = async () => {
-  const url = "http://192.168.1.57:3004/teams";
+  const url = "https://kerst-quiz-db.vercel.app/api/teams/";
   const res = await fetch(url);
 
   const teams: TeamType[] = await res.json();
