@@ -19,6 +19,8 @@ const ButtonStyled = styled.div<{ color?: string }>`
 
   font-size: 1.5rem;
   z-index: 2;
+
+  transition: background-color 1s ease-in;
 `;
 
 interface IButton {

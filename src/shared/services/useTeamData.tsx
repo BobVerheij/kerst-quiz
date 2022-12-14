@@ -4,31 +4,32 @@ import { Team } from "../../types/types";
 export const useTeamData = (id: string) => {
   const [team, setTeam] = useState<Team>();
 
-  const URL = "https://tunnel.humanoids.nl/teams/";
+  const URL = "https://tunnel.humanoids.nl/teams/" + id;
 
   const fetchData = async () => {
     try {
       const res = await fetch(URL);
       const json = await res.json();
 
-      const team = json?.find((team) => team.id === id || team.name === id);
-
-      setTeam(team);
+      setTeam(json);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    if (!id) {
+      return;
+    }
+
     const intervalletje = setInterval(() => {
       fetchData();
     }, 60000);
 
-    console.log(id);
     fetchData();
 
     return () => clearInterval(intervalletje);
-  }, []);
+  }, [id]);
 
   return { team, fetchData };
 };

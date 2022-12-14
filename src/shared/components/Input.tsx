@@ -15,11 +15,12 @@ const InputStyled = styled.input<{ square?: boolean }>`
   cursor: pointer;
   width: 100%;
   max-width: 400px;
-  border-radius: none !important;
   outline: none;
 
   font-size: 1.5rem;
   z-index: 2;
+
+  box-sizing: border-box;
 
   ${({ square }) =>
     square &&

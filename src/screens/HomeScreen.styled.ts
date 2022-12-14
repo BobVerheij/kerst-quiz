@@ -12,6 +12,9 @@ export const HomeScreen = styled.div<{ bgColor?: string; fullWidth?: boolean }>`
   margin: 0 auto;
   padding: 2rem 1rem;
   min-height: 100vh;
+  height: 100%;
+
+  padding-bottom: 20rem;
 
   background-color: ${({ bgColor }) => bgColor || "#fff"};
 

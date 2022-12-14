@@ -9,28 +9,35 @@ import { ShredFilter } from "../../shared/components/ShredFilter";
 import { useTeamData } from "../../shared/services/useTeamData";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Input } from "../../shared/components/Input";
+import { RoundForm } from "../../shared/components/RoundForm";
 
 const Team = () => {
   const router = useRouter();
   const { id } = router.query;
 
   const [showScore, setShowScore] = useState(false);
+  const [currentRound, setCurrentRound] = useState<number | undefined>();
 
   const { team, fetchData: refetchData } = useTeamData(id as string);
 
-  console.log(team?.name);
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    refetchData();
+  }, [id]);
 
-  const lastRound = team?.scores?.length || 1;
+  const lastRound =
+    team?.scores?.find(
+      (score) => score.correct >= 0 || score.bonus >= 0 || score.answers.length
+    ).round || 0;
   const nextRound = lastRound < 7 ? lastRound + 1 : 7;
 
   const handleShred = async () => {
     const url = "https://tunnel.humanoids.nl/teams/" + team?.id;
 
-    console.log(url);
-
     const currentTeam: TeamType = await (await fetch(url)).json();
-
-    console.log(currentTeam);
 
     const scoresFilled = currentTeam?.scores?.some(
       (s) => s.round === lastRound
@@ -39,13 +46,13 @@ const Team = () => {
     const scoresUpdated = scoresFilled
       ? [...(currentTeam?.scores || [])].map((s) => {
           if (s.round === lastRound) {
-            return { ...s, correct: 10, shredded: true };
+            return { ...s, correct: 10, shredded: true, round: nextRound };
           }
           return s;
         })
       : [
           ...(currentTeam?.scores || []),
-          { round: lastRound, correct: 10, bonus: 0, shredded: true },
+          { round: nextRound, correct: 10, bonus: 0, shredded: true },
         ];
 
     const update: TeamType = {
@@ -85,36 +92,25 @@ const Team = () => {
             >{`<-- back to score overview`}</a>
           </Link>
           <br />
-          <h1>Team: {team.name?.toUpperCase() || team.id}</h1>
+          <h1>Team: {team.name?.toUpperCase()}</h1>
           <br />
           <p>Current Round: {nextRound}</p>
           <br />
           <Button
             color={team.hex}
-            label={!showScore ? "SEE SCORE (**)" : `HIDE SCORE (${score})`}
+            label={!showScore ? "SEE SCORE ( ** )" : `HIDE SCORE ( ${score} )`}
             handleClick={() => {
               setShowScore(!showScore);
             }}
           ></Button>
           <br />
-          <Paper shredded={hasShredded} color={team.hex}></Paper>
-          <Button
-            style={{
-              marginTop: hasShredded ? "-150px" : "-40px",
-              transition: "margin-top 2s ease-out",
-            }}
-            color={team.hex}
-            label={
-              !hasShredded ? `SHRED ROUND ${lastRound}?` : "CAN'T UNSHRED!"
-            }
-            handleClick={async () => {
-              if (!hasShredded) {
-                await handleShred();
-              }
-            }}
-          >
-            <ShredFilter color={team.hex} />
-          </Button>
+
+          <RoundForm
+            handleShred={handleShred}
+            hasShredded={hasShredded}
+            round={nextRound}
+            team={team}
+          />
         </ScreenStyles.HomeScreen>
       ) : (
         <p>Failed to load team!?</p>

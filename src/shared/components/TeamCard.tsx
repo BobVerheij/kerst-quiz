@@ -59,7 +59,7 @@ export const TeamCard = ({
       bgColor={team?.hex}
       onClick={() => {
         if (team.name) {
-          return router.push(`/teams/${team.name}`);
+          return router.push(`/teams/${team.id}`);
         }
         return router.push(`/teams/add/${team.id}`);
       }}

@@ -29,7 +29,7 @@ const Addition = () => {
       body: JSON.stringify(nameChange),
     });
 
-    router.push("/");
+    router.push("/teams/" + id);
   };
 
   return (
@@ -67,7 +67,11 @@ const Addition = () => {
               }}
             />
           </div>
-          <Button label="SAVE NAME & COLOR" handleClick={handleSave}></Button>
+          <Button
+            color={color}
+            label="SAVE NAME & COLOR"
+            handleClick={handleSave}
+          ></Button>
         </>
       ) : null}
     </HomeScreen>
