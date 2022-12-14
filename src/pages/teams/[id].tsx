@@ -8,6 +8,7 @@ import { Paper } from "../../shared/components/Paper";
 import { ShredFilter } from "../../shared/components/ShredFilter";
 import { useTeamData } from "../../shared/services/useTeamData";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Team = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const Team = () => {
   const nextRound = lastRound < 7 ? lastRound + 1 : 7;
 
   const handleShred = async () => {
-    const url = "https://kerst-quiz-db.vercel.app/api/teams/" + team?.id;
+    const url = "https://tunnel.humanoids.nl/teams/" + team?.id;
 
     console.log(url);
 
@@ -78,6 +79,12 @@ const Team = () => {
         <ScreenStyles.HomeScreen bgColor={team.hex} fullWidth>
           <meta name="theme-color" content={team.hex} />
 
+          <Link href={"/"}>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+            >{`<-- back to score overview`}</a>
+          </Link>
+          <br />
           <h1>Team: {team.name?.toUpperCase() || team.id}</h1>
           <br />
           <p>Current Round: {nextRound}</p>

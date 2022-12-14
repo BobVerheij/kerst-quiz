@@ -14,6 +14,8 @@ const Wrapper = styled.div<{ bgColor?: string; pos?: number }>`
   margin-bottom: 0.5rem;
   position: absolute;
 
+  top: 0px;
+
   top: ${({ pos }) => pos || 0}px;
 
   transition: top 2s ease;

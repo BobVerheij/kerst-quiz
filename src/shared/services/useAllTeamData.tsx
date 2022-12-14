@@ -4,7 +4,7 @@ import { Team } from "../../types/types";
 export const useAllTeamData = () => {
   const [teams, setTeams] = useState<Team[]>();
 
-  const URL = "https://kerst-quiz-db.vercel.app/api/teams/";
+  const URL = "https://tunnel.humanoids.nl/teams/";
 
   const fetchData = async () => {
     try {

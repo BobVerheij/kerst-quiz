@@ -10,7 +10,7 @@ export const HomeScreen = () => {
 
   return (
     <Styled.HomeScreen bgColor="#eee" fullWidth>
-      <h1>Teams</h1>
+      <h1>{teams ? "Teams" : "No Connection"}</h1>
       <div
         style={{
           position: "relative",

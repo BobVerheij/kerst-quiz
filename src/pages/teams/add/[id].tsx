@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { HomeScreen } from "../../../screens/HomeScreen.styled";
@@ -12,7 +13,7 @@ const Addition = () => {
   const [color, setColor] = useState<string>("");
 
   const handleSave = async () => {
-    const url = "https://kerst-quiz-db.vercel.app/api/teams/" + (id as string);
+    const url = "https://tunnel.humanoids.nl/teams/" + (id as string);
 
     if (!(name && color)) {
       return;
@@ -32,9 +33,15 @@ const Addition = () => {
   };
 
   return (
-    <HomeScreen bgColor={color}>
+    <HomeScreen bgColor={color} fullWidth>
       {id ? (
         <>
+          <Link href={"/"}>
+            <a
+              style={{ textDecoration: "none", color: "black" }}
+            >{`<-- back to score overview`}</a>
+          </Link>
+          <br />
           <h2>Your Team Name</h2>
           <h1>{(name || (id as string))?.toUpperCase()}</h1>
           <div
