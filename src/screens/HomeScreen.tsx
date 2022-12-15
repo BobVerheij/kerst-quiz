@@ -73,10 +73,10 @@ export const HomeScreen = () => {
             ></TeamCard>
           ))}
       </div>
-      <Button
+      {/* <Button
         label="show scores"
         handleClick={() => setShowScore(!showScore)}
-      ></Button>
+      ></Button> */}
 
       <FirePlace
         style={{
