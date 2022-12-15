@@ -5,10 +5,11 @@ export const HomeScreen = styled.div<{ bgColor?: string; fullWidth?: boolean }>`
     font-family: "Connection";
   }
   display: flex;
+  gap: 1rem;
   flex-flow: column nowrap;
   align-items: center;
   width: clamp(300px, 100%, 600px);
-  ${({ fullWidth }) => fullWidth && "width: 100%;"};
+  ${({ fullWidth }) => fullWidth && "width: 100%"};
   margin: 0 auto;
   padding: 2rem 1rem;
   min-height: 100vh;
@@ -16,9 +17,11 @@ export const HomeScreen = styled.div<{ bgColor?: string; fullWidth?: boolean }>`
 
   padding-bottom: 20rem;
 
-  background-color: ${({ bgColor }) => bgColor || "#fff"};
+  background-color: ${({ bgColor }) => bgColor || "blanchedalmond"};
 
   transition: background-color 1s ease-in;
+
+  text-align: center;
 
   h1,
   h2,

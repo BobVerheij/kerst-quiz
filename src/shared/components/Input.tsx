@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const InputStyled = styled.input<{ square?: boolean }>`
+const InputStyled = styled.input<{ square?: boolean; bgColor?: string }>`
   all: unset;
 
   position: relative;
@@ -9,7 +9,7 @@ const InputStyled = styled.input<{ square?: boolean }>`
   padding: 0.5rem;
   text-align: center;
 
-  background-color: transparent;
+  background-color: ${({ bgColor }) => bgColor || "blanchedAlmond"};
 
   user-select: none;
   cursor: pointer;
@@ -22,6 +22,8 @@ const InputStyled = styled.input<{ square?: boolean }>`
 
   box-sizing: border-box;
 
+  transition: background-color 1s ease-in;
+
   ${({ square }) =>
     square &&
     css`
@@ -32,16 +34,19 @@ const InputStyled = styled.input<{ square?: boolean }>`
 `;
 
 export const Input = ({
+  color,
   type,
   handleChange,
   placeholder,
 }: {
+  color?: string;
   type: string;
   placeholder?: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
     <InputStyled
+      bgColor={color}
       placeholder={placeholder}
       onChange={(e) => {
         handleChange(e);

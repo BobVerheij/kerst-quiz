@@ -131,7 +131,7 @@ export default (props) => {
 
     p5.frameRate(6);
 
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 50; i++) {
       pieces.push(new FirePiece(true, p5));
     }
 
@@ -143,8 +143,6 @@ export default (props) => {
   const draw = (p5) => {
     p5.clear();
     p5.fill("#602812");
-    p5.stroke("black");
-    p5.strokeWeight(4);
     p5.rect(p5.width / 2, p5.height - (16 * 4) / 2, p5.width / 1.5, 16 * 4);
 
     p5.noStroke();

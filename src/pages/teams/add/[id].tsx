@@ -54,6 +54,7 @@ const Addition = () => {
             }}
           >
             <Input
+              color={color}
               type="text"
               placeholder="ENTER TEAM NAME"
               handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +62,7 @@ const Addition = () => {
               }}
             />
             <Input
+              color={color}
               type="color"
               handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setColor(e.target.value.toLowerCase());
@@ -68,7 +70,7 @@ const Addition = () => {
             />
           </div>
           <Button
-            color={color}
+            color={color || "blanchedalmond"}
             label="SAVE NAME & COLOR"
             handleClick={handleSave}
           ></Button>
