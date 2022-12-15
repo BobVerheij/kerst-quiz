@@ -34,11 +34,13 @@ const InputStyled = styled.input<{ square?: boolean; bgColor?: string }>`
 `;
 
 export const Input = ({
+  value,
   color,
   type,
   handleChange,
   placeholder,
 }: {
+  value?: string;
   color?: string;
   type: string;
   placeholder?: string;
@@ -46,6 +48,7 @@ export const Input = ({
 }) => {
   return (
     <InputStyled
+      value={value}
       bgColor={color}
       placeholder={placeholder}
       onChange={(e) => {

@@ -31,7 +31,7 @@ const Team = () => {
 
   const score =
     team?.scores?.reduce(
-      (acc, dat) => acc + dat.correct + (dat.bonus || 0),
+      (acc, dat) => acc + (dat.correct || 0) + (dat.bonus || 0),
       0
     ) || 0;
 
@@ -48,7 +48,11 @@ const Team = () => {
           </Link>
 
           <h1>Team: {team.name?.toUpperCase()}</h1>
-          <p>Current Round: {currentRound}</p>
+          {currentRound ? (
+            <p>Current Round: {currentRound}</p>
+          ) : (
+            <h3>The game has not started yet!</h3>
+          )}
 
           <RoundForm team={team} />
 

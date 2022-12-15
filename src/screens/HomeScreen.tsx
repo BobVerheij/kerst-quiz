@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import { Button } from "../shared/components/Button";
 import { TeamCard } from "../shared/components/TeamCard";
 import { useAllTeamData } from "../shared/services/useAllTeamData";
 import { useGameInfo } from "../shared/services/useGameInfo";
@@ -17,29 +16,44 @@ export const HomeScreen = () => {
 
   const windowSize = useWindowSize();
 
-  const [showScore, setShowScore] = useState(false);
-
   const currentRound = gameInfo?.currentRound || 0;
+
+  const showScore = gameInfo?.showScore;
+  const sortScore = gameInfo?.sortScore;
 
   const countdown = Math.floor(
     (new Date("Dec 16, 2022 18:00:00").getTime() - new Date().getTime()) / 1000
   );
-  // const countdown = Math.floor(
-  //   (new Date("Dec 16, 2022 18:00:00").getTime() - new Date().getTime()) / 1000
-  // );
 
   const hours = Math.floor(countdown / 3600);
-  const minutes = Math.floor(countdown / 60) % (24 * 60);
+  const minutes = Math.floor(countdown / 60) % 60;
+
+  const displayTeams = [...(teams || [])]
+    ?.sort((a, b) => (a.name || a.id)?.localeCompare(b.name || b.id))
+    ?.sort((a, b) =>
+      sortScore
+        ? (b.scores?.reduce(
+            (acc, dat) => (dat.correct || 0) + (dat.bonus || 0) + acc,
+            0
+          ) || 0) -
+          (a.scores?.reduce(
+            (acc, dat) => (dat.correct || 0) + (dat.bonus || 0) + acc,
+            0
+          ) || 0)
+        : 0
+    );
 
   return (
     <Styled.HomeScreen bgColor="blanchedalmond" fullWidth>
       <h1>{teams ? "Teams" : "No Connection"}</h1>
       <h2>{currentRound ? `Round ${currentRound}` : "Game starts in..."}</h2>
-      {countdown > 0 ? (
+      {!currentRound && countdown > 0 ? (
         countdown < 1000 ? (
-          <h1>{countdown}</h1>
+          <h1>{countdown} seconds</h1>
         ) : (
-          <h3>{`${hours}:${minutes}`}</h3>
+          <h3>{`${("00" + hours.toString()).slice(-2)}:${(
+            "00" + minutes.toString()
+          ).slice(-2)}`}</h3>
         )
       ) : null}
       <div
@@ -50,28 +64,15 @@ export const HomeScreen = () => {
           height: teams?.length * 72 || 0,
         }}
       >
-        {teams
-          ?.sort((a, b) => (a.name || a.id)?.localeCompare(b.name || b.id))
-          ?.sort(
-            (a, b) =>
-              (b.scores?.reduce(
-                (acc, dat) => dat.correct + (dat.bonus || 0) + acc,
-                0
-              ) || 0) -
-              (a.scores?.reduce(
-                (acc, dat) => dat.correct + (dat.bonus || 0) + acc,
-                0
-              ) || 0)
-          )
-          .map((t, index) => (
-            <TeamCard
-              pos={index * 72}
-              key={t.id}
-              index={index}
-              team={t}
-              showScore={showScore}
-            ></TeamCard>
-          ))}
+        {displayTeams.map((t, index) => (
+          <TeamCard
+            pos={index * 72}
+            key={t.id}
+            index={index}
+            team={t}
+            showScore={showScore}
+          ></TeamCard>
+        ))}
       </div>
       {/* <Button
         label="show scores"
@@ -85,7 +86,7 @@ export const HomeScreen = () => {
           transform: "translateY(6px)",
           pointerEvents: "none",
         }}
-        w={windowSize?.width < 800 ? window.innerWidth : 800}
+        w={windowSize?.width < 600 ? window.innerWidth : 600}
       />
     </Styled.HomeScreen>
   );

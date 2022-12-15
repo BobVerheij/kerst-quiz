@@ -23,6 +23,7 @@
   "devDependencies": {
     "@humanoids/eslint-config": "^0.0.14",
     "@humanoids/prettier-config": "^0.0.4",
+    "@types/react-dom": "^18.0.9",
     "@types/styled-components": "^5.1.26",
     "babel-plugin-inline-react-svg": "^2.0.1",
     "eslint": "^8.11.0",

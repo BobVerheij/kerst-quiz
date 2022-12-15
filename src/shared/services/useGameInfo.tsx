@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Team } from "../../types/types";
 
 type GameInfo = {
   currentRound?: number;
+  showScore?: boolean;
+  sortScore?: boolean;
 };
 
 export const useGameInfo = () => {
@@ -24,7 +25,7 @@ export const useGameInfo = () => {
   useEffect(() => {
     const intervalletje = setInterval(() => {
       fetchData();
-    }, 60000);
+    }, 1000);
 
     fetchData();
 

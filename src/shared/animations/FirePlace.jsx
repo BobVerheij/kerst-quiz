@@ -134,16 +134,24 @@ export default (props) => {
     for (let i = 0; i < 50; i++) {
       pieces.push(new FirePiece(true, p5));
     }
-
-    for (let i = 0; i < p5.width / 2 + 32; i += 16) {
-      front.push(new Ash(p5));
-    }
   };
 
   const draw = (p5) => {
+    p5.resizeCanvas(props?.w || 600, 400);
+
+    let logwidth = p5.width * 0.66;
+
+    if (p5.frameCount % 10 === 0 || p5.frameCount === 1) {
+      front = [];
+
+      for (let i = 0; i < logwidth; i += 16) {
+        front.push(new Ash(p5));
+      }
+    }
+
     p5.clear();
     p5.fill("#602812");
-    p5.rect(p5.width / 2, p5.height - (16 * 4) / 2, p5.width / 1.5, 16 * 4);
+    p5.rect(p5.width / 2, p5.height - (16 * 4) / 2, p5.width * 0.8, 16 * 4);
 
     p5.noStroke();
     pieces = pieces.sort((a, b) => b.size - a.size);
@@ -163,11 +171,11 @@ export default (props) => {
     }
 
     p5.fill("#602812");
-    p5.rect(p5.width / 2, p5.height, p5.width / 1.5 - 4, 16 * 4);
+    p5.rect(p5.width / 2, p5.height, logwidth, 16 * 4);
     for (let i in front) {
       p5.fill(front[i].color);
       p5.rect(
-        p5.width / 2 - p5.width / 4 - 16 + 16 * i,
+        p5.width / 2 - logwidth / 2 + 16 * i + 8,
         p5.height - 32 + front[i].disp,
         16,
         16

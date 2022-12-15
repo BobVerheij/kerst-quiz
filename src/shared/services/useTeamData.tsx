@@ -24,7 +24,7 @@ export const useTeamData = (id: string) => {
 
     const intervalletje = setInterval(() => {
       fetchData();
-    }, 60000);
+    }, 10000);
 
     fetchData();
 
