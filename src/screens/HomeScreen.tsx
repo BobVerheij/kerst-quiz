@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import dynamic from "next/dynamic";
+import React, { useEffect, useState } from "react";
 import { Button } from "../shared/components/Button";
 import { TeamCard } from "../shared/components/TeamCard";
 import { useAllTeamData } from "../shared/services/useAllTeamData";
