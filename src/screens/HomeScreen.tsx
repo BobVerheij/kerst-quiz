@@ -22,7 +22,7 @@ export const HomeScreen = () => {
   const sortScore = gameInfo?.sortScore;
 
   const countdown = Math.floor(
-    (new Date("Dec 16, 2022 16:00:00").getTime() - new Date().getTime()) / 1000
+    (new Date("Dec 16, 2022 17:00:00").getTime() - new Date().getTime()) / 1000
   );
 
   const hours = Math.floor(countdown / 3600);
